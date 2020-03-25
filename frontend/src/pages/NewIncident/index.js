@@ -40,7 +40,7 @@ export default function NewIncident(){
             history.push('/profile');
 
         }catch(err){
-            alert('Erro ao cadastrar novo caso, tente novamente!');
+            alert('Algo deu errado ao cadastrar o caso, tente novamente!');
         }
     }
 

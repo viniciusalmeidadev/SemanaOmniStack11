@@ -26,6 +26,7 @@ routes.post('/ongs', celebrate({
         whatsapp: Joi.string().required().min(10).max(11),
         city: Joi.string().required(),
         uf: Joi.string().required().length(2),
+        password: Joi.string().required()
     }),
 }), OngController.create);
 

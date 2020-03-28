@@ -4,7 +4,7 @@ const connection = require('../../src/database/connection');
 
 describe('ONG', () =>{
     beforeEach(async ()=>{
-        await connection.migrate.rollback();
+        
         await connection.migrate.latest();
     });
 
@@ -21,10 +21,15 @@ describe('ONG', () =>{
             email:"ola@ola.com",
             whatsapp:"1999999999",
             city:"rio do sul",
-            uf: "sp"
+            uf: "sp",
+            password: "1234",
         });
 
         expect(response.body).toHaveProperty('id');
+        
         expect(response.body.id).toHaveLength(8);
+        expect(response.body).toHaveProperty('password');
+        console.log(response.body);
+        
     })
 })

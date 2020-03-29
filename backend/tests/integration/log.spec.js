@@ -48,7 +48,7 @@ describe('LogIn', () =>{
         expect(responseone.status).toBe(200);
     })
 
-    it('acess blank', async () =>{
+    it('access blank', async () =>{
 
         const User = "6b60353b";
         const response = await request(app)
@@ -68,7 +68,7 @@ describe('LogIn', () =>{
         
     })
 
-    it('acess not permited', async () =>{
+    it('access not permited', async () =>{
         const User = "6b60353b";
         const response = await request(app)
         .post('/sessions')

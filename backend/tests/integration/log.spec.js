@@ -1,6 +1,8 @@
+require('dotenv').config();
 const request = require('supertest');
 const app = require('../../src/app');
 const connection = require('../../src/database/connection');
+const jwt = require('jsonwebtoken');
 
 describe('LogIn', () =>{
     beforeEach(async ()=>{
@@ -24,7 +26,68 @@ describe('LogIn', () =>{
 
        
         console.log(response.body);
+        expect(response.body).toHaveProperty('token');
         
     })
+
+    it('access permited',  async () =>{
+        const User = "6b60353b";
+        const response = await request(app)
+        .post('/sessions')
+        .send({
+            userId: User,
+            userPassword: "1234",
+        });
+
+        const token = jwt.sign({id: User}, process.env.APP_SECRET);
+
+        const responseone = await request(app)
+        .get('/dashboard')
+        .set('Authorization', `Bearer ${token}`)
+
+        expect(responseone.status).toBe(200);
+    })
+
+    it('acess blank', async () =>{
+
+        const User = "6b60353b";
+        const response = await request(app)
+        .post('/sessions')
+        .send({
+            userId: User,
+            userPassword: "1234",
+        });
+
+        
+
+        const responseone = await request(app)
+        .get('/dashboard')
+       
+
+        expect(responseone.status).toBe(401);
+        
+    })
+
+    it('acess not permited', async () =>{
+        const User = "6b60353b";
+        const response = await request(app)
+        .post('/sessions')
+        .send({
+            userId: User,
+            userPassword: "1234",
+        });
+
+        const token = jwt.sign({id: User}, process.env.APP_SECRET);
+
+        const responseone = await request(app)
+        .get('/dashboard')
+        .set('Authorization', `Bearer 12131`) 
+        
+        expect(responseone.status).toBe(401);
+    })
+
+       
+
+    
 })
 

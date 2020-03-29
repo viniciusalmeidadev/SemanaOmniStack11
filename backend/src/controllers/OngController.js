@@ -15,20 +15,21 @@ module.exports = {
         const {name, email, whatsapp, city, uf} = req.body;
         let { password } = req.body;
 
-        const id = generateUniqueId();
-        const hash = await bcrypt.hash(password, 10);
-        password = hash;
-        await connection('ongs').insert({
-            id,
-            name,
-            email,
-            whatsapp,
-            city,
-            uf,
-            password
-        })
-    
-     
-        return res.json({id, password});
+            const id = generateUniqueId();
+            const hash = await bcrypt.hash(password, 10);
+            password = hash;
+            await connection('ongs').insert({
+                id,
+                name,
+                email,
+                whatsapp,
+                city,
+                uf,
+                password
+            })
+        
+         
+            return res.json({id, password, email});
+       
     }
 };

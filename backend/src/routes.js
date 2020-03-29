@@ -1,4 +1,7 @@
 const express = require('express');
+
+const authMiddleware = require('./middleware/auth');
+
 const { celebrate, Segments, Joi } = require('celebrate');
 
 const OngController = require('./controllers/OngController');
@@ -16,6 +19,7 @@ routes.post('/sessions', celebrate({
         id: Joi.string().required(),
     }).keys(),
 }),SessionController.create);
+
 
 routes.get('/ongs', OngController.index);
 
@@ -64,6 +68,12 @@ routes.delete('/incidents/:id', celebrate({
         id: Joi.number().required(),
     })
 }), IncidentsController.delete);
+
+routes.use(authMiddleware);
+
+routes.get('/dashboard',(req,res)=>{
+    return res.status(200).send();
+});
 
 
 

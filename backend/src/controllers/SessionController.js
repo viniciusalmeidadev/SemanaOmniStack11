@@ -1,5 +1,8 @@
+require('dotenv').config();
 const connection = require('../database/connection');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 
 
@@ -32,7 +35,9 @@ module.exports = {
             return res.status(400).json({error: 'Password Invalid'});
         }
     
-        return res.json({userPassword, password, ong});
+        const token = jwt.sign({id: userId}, process.env.APP_SECRET);
+        
+        return res.json({userPassword, password, ong, token});
 
         }
 }

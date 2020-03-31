@@ -17,10 +17,11 @@ export default function NewIncident(){
     const[description, setDescription] = useState('');
     const[value, setValue] = useState('');
 
+    const JWTtoken = localStorage.getItem('Authorization');
     const ongId = localStorage.getItem('ongId');
     const history = useHistory();
 
-    async function handleNewIncident(e){
+ async function handleNewIncident(e){
         e.preventDefault();
 
         const data = {
@@ -33,7 +34,8 @@ export default function NewIncident(){
 
             await api.post('incidents', data,{
                 headers:{
-                    Authorization: ongId,
+                    Authorization: `Bearer ${JWTtoken}`,
+                    ong_id: ongId,
                 }
             })
 

@@ -10,7 +10,8 @@ import logoImg from '../../assets/logo.svg';
 
 export default function Login(){
 
-    const[id, setId] = useState('');
+    const[userId, setUserId] = useState('');
+    const[userPassword, setUserPassword] = useState('');
 
     const history = useHistory();
 
@@ -18,10 +19,11 @@ export default function Login(){
         e.preventDefault();
 
         try{
-            const response = await api.post('sessions', {id});
-
-            localStorage.setItem('ongId', id);
-            localStorage.setItem('ongName', response.data.name)
+            const response = await api.post('sessions', {userId, userPassword});
+            localStorage.setItem('Authorization', response.data.token);
+            localStorage.setItem('ongId', userId);
+            localStorage.setItem('ongName', response.data.ong.name);
+            
 
            history.push('/profile')
 
@@ -40,9 +42,17 @@ export default function Login(){
 
                     <input 
                     placeholder="Sua ID"
-                    value={id}
-                    onChange = {e => setId(e.target.value)}
+                    value={userId}
+                    onChange = {e => setUserId(e.target.value)}
                     />
+
+                    <input
+                    type="password"
+                    placeholder="Sua Senha"
+                    value={userPassword}
+                    onChange = {e => setUserPassword(e.target.value)}
+                    />
+
                     <button type="submit" className="button">Entrar</button>
 
                     <Link className="back-link" to="/register">
@@ -56,3 +66,4 @@ export default function Login(){
         </div>
     );
 }
+

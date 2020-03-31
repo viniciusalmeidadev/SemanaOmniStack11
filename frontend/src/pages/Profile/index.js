@@ -10,6 +10,7 @@ import logoImg from '../../assets/logo.svg';
 export default function Profile(){
     const [incidents, setIncidents] = useState([]);
 
+    const JWTtoken = localStorage.getItem('Authorization');
     const ongId = localStorage.getItem('ongId');
     const ongName = localStorage.getItem('ongName');
 
@@ -18,10 +19,12 @@ export default function Profile(){
     useEffect(()=>{
         api.get('profile', {
             headers: {
-                Authorization: ongId,
+                Authorization: `Bearer ${JWTtoken}`,
+                ong_id: ongId,
             }
         }).then(response =>{
             setIncidents(response.data);
+            console.log(ongId)
         })
     }, [ongId]);
 
@@ -29,7 +32,8 @@ export default function Profile(){
         try{
             await api.delete(`incidents/${id}`, {
                 headers:{
-                    Authorization: ongId,
+                    Authorization: `Bearer ${JWTtoken}`,
+                    ong_id: ongId,
                 }
             });
             setIncidents(incidents.filter(incident => incident.id !== id));

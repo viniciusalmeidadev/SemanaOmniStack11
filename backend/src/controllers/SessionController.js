@@ -12,7 +12,7 @@ module.exports = {
         const { userId, userPassword } = req.body;
 
 
-        const ong = await connection('ongs')
+        const ong = await connection('ongsCompleted')
         .where('id', userId)
         .select('name')
         .first();
@@ -23,7 +23,7 @@ module.exports = {
             return res.status(400).json({error: 'No Ong found with this Id'});
         }
 
-        const {password} = await connection('ongs')
+        const {password} = await connection('ongsCompleted')
         .where('id', userId)
         .select('password')
         .first();
@@ -36,8 +36,9 @@ module.exports = {
         }
     
         const token = jwt.sign({id: userId}, process.env.APP_SECRET);
+
         
-        return res.json({userPassword, password, ong, token});
+        return res.json({userId, ong, token});
 
         }
 }

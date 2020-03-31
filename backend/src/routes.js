@@ -35,15 +35,6 @@ routes.post('/ongs', celebrate({
 }), OngController.create);
 
 
-
-routes.get('/profile', celebrate({
-    [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required(),
-    }).unknown(),
-}), ProfileController.index);
-
-
-
 routes.post('/incidents', celebrate({
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
@@ -71,9 +62,12 @@ routes.delete('/incidents/:id', celebrate({
 
 routes.use(authMiddleware);
 
-routes.get('/dashboard',(req,res)=>{
-    return res.status(200).send();
-});
+routes.get('/profile', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        ong_id: Joi.string().required(),
+    }).unknown(),
+}), ProfileController.index);
+
 
 
 

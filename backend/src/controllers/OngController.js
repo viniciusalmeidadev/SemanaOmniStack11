@@ -6,7 +6,7 @@ const generateUniqueId = require('../utils/generateUniqueId');
 module.exports = {
 
     async index (req,res){
-        const ongs = await connection('ongs').select('*');
+        const ongs = await connection('ongsCompleted').select('*');
     
         return res.json(ongs);
     },
@@ -18,7 +18,7 @@ module.exports = {
             const id = generateUniqueId();
             const hash = await bcrypt.hash(password, 10);
             password = hash;
-            await connection('ongs').insert({
+            await connection('ongsCompleted').insert({
                 id,
                 name,
                 email,

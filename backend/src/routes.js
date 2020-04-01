@@ -4,6 +4,8 @@ const authMiddleware = require('./middleware/auth');
 
 const { celebrate, Segments, Joi } = require('celebrate');
 
+const UsersController = require('./controllers/UsersController');
+
 const OngController = require('./controllers/OngController');
 
 const IncidentsController = require('./controllers/IncidentController');
@@ -12,14 +14,21 @@ const ProfileController = require('./controllers/ProfileController');
 
 const SessionController = require('./controllers/SessionController');
 
+const UserSessionController = require('./controllers/UserSessionController');
+
 const routes = express.Router();
 
-routes.post('/sessions', celebrate({
+routes.post('/sessions/ong', celebrate({
     [Segments.BODY]: Joi.object({
         id: Joi.string().required(),
     }).keys(),
 }),SessionController.create);
 
+routes.post('/sessions/user', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        uName: Joi.string().required(),
+    })
+}), UserSessionController.create);
 
 routes.get('/ongs', OngController.index);
 
@@ -39,6 +48,18 @@ routes.get('/incidents', celebrate({
         page: Joi.number(),
     })
 }),IncidentsController.index);
+
+routes.post('/users', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        username: Joi.string().required(),
+        name: Joi.string().required(),
+        email: Joi.string().required().email(),
+        password: Joi.string().required(),
+        
+    })
+}), UsersController.create);
+
+routes.get('/users', UsersController.index);
 
 
 

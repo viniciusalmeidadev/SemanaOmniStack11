@@ -12,7 +12,7 @@ module.exports = {
     },
 
     async create(req,res){
-        const {name, email, whatsapp, city, uf} = req.body;
+        const {name, ongName, email, whatsapp, city, uf} = req.body;
         let { password } = req.body;
 
             const id = generateUniqueId();
@@ -20,6 +20,7 @@ module.exports = {
             password = hash;
             await connection('ongsCompleted').insert({
                 id,
+                ongName,
                 name,
                 email,
                 whatsapp,

@@ -16,6 +16,10 @@ const SessionController = require('./controllers/SessionController');
 
 const UserSessionController = require('./controllers/UserSessionController');
 
+const UserProfileController = require('./controllers/UserProfileController');
+
+const RechargeController = require('./controllers/RechargeController');
+
 const routes = express.Router();
 
 routes.post('/sessions/ong', celebrate({
@@ -27,6 +31,7 @@ routes.post('/sessions/ong', celebrate({
 routes.post('/sessions/user', celebrate({
     [Segments.BODY]: Joi.object().keys({
         uName: Joi.string().required(),
+        userPass: Joi.string().required()
     })
 }), UserSessionController.create);
 
@@ -65,11 +70,21 @@ routes.get('/users', UsersController.index);
 
 routes.use(authMiddleware);
 
-routes.get('/profile', celebrate({
+routes.get('/profile/user', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+    }).unknown(),
+}), UserProfileController.index);
+
+routes.get('/profile/ong', celebrate({
     [Segments.HEADERS]: Joi.object({
         ong_id: Joi.string().required(),
     }).unknown(),
 }), ProfileController.index);
+
+routes.put('/recharge', RechargeController.update);
+
+
 
 routes.post('/incidents', celebrate({
     [Segments.HEADERS]: Joi.object({

@@ -82,7 +82,15 @@ routes.get('/profile/ong', celebrate({
     }).unknown(),
 }), ProfileController.index);
 
-routes.put('/recharge', RechargeController.update);
+routes.put('/recharge',celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+        saldonow: Joi.number().required(),
+    }).unknown(),
+    [Segments.BODY]: Joi.object().keys({
+        value: Joi.number().required(),
+    })
+}),  RechargeController.update);
 
 
 

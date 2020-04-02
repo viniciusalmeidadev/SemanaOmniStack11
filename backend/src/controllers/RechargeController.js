@@ -1,27 +1,30 @@
 const connection = require('../database/connection');
 
 module.exports = {
+    async index(req,res){
+        const recharges = await connection('recharge')
+        .select('*');
+
+        return res.json({recharges});
+    },
     async update(req, res) {
-    const { username, saldonow } = req.headers;
+    const { username } = req.headers;
 
 
     const { value } = req.body;
 
-    const recarga = value + saldonow;
-
-
-
+    //Fazendo a recarga
      await connection('users')
     .where('username', username)
-    .update('saldo', recarga);
+    .increment('saldo', value);
 
-    const {saldo} = await connection('users')
-    .where('username', username)
-    .select()
-    .first();
+    //Gerando uma recarga para o histórico de recargas
+    await connection('recharge').insert({
+        username,
+        value
+    });
 
-    
+    return res.json({message: 'tudo certo'});
 
-    return res.json({saldo});
 }
 }

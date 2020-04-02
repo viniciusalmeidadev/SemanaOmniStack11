@@ -37,6 +37,8 @@ routes.post('/sessions/user', celebrate({
 
 routes.get('/ongs', OngController.index);
 
+routes.get('/recharge', RechargeController.index);
+
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
@@ -85,7 +87,7 @@ routes.get('/profile/ong', celebrate({
 routes.put('/recharge',celebrate({
     [Segments.HEADERS]: Joi.object({
         username: Joi.string().required(),
-        saldonow: Joi.number().required(),
+        
     }).unknown(),
     [Segments.BODY]: Joi.object().keys({
         value: Joi.number().required(),

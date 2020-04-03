@@ -30,11 +30,14 @@ module.exports = {
 
       const ong_id = req.headers.ong_id;
 
+      const collected = 0;
+
       const [id] = await connection('incidents').insert({
           title,
           description,
           value,
           ong_id,
+          collected
       });
 
       return res.json({id});  

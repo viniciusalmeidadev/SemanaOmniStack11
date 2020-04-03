@@ -2,7 +2,11 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(req,res){
+        const {username} = req.headers;
+
+        //Buscando o histórico de recargas de um determinado usuário
         const recharges = await connection('recharge')
+        .where('username', username)
         .select('*');
 
         return res.json({recharges});

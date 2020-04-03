@@ -37,7 +37,7 @@ routes.post('/sessions/user', celebrate({
 
 routes.get('/ongs', OngController.index);
 
-routes.get('/recharge', RechargeController.index);
+
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -93,6 +93,12 @@ routes.put('/recharge',celebrate({
         value: Joi.number().required(),
     })
 }),  RechargeController.update);
+
+routes.get('/recharge/list', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+    }).unknown(),
+}), RechargeController.index);
 
 
 

@@ -20,6 +20,8 @@ const UserProfileController = require('./controllers/UserProfileController');
 
 const RechargeController = require('./controllers/RechargeController');
 
+const DonationController = require('./controllers/DonationController');
+
 const routes = express.Router();
 
 routes.post('/sessions/ong', celebrate({
@@ -37,11 +39,12 @@ routes.post('/sessions/user', celebrate({
 
 routes.get('/ongs', OngController.index);
 
-
+routes.post('/donation/:id',DonationController.create);
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
+        ongname: Joi.string().required(),
         email: Joi.string().required().email(),
         whatsapp: Joi.string().required().min(10).max(11),
         city: Joi.string().required(),

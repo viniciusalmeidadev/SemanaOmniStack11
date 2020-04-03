@@ -30,6 +30,11 @@ module.exports = {
 
       const ong_id = req.headers.ong_id;
 
+      const {ongName} = await connection('ongsCompleted')
+      .where('id', ong_id)
+      .select('ongName')
+      .first();
+
       const collected = 0;
 
       const [id] = await connection('incidents').insert({
@@ -37,6 +42,7 @@ module.exports = {
           description,
           value,
           ong_id,
+          ongName,
           collected
       });
 

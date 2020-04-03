@@ -1,13 +1,19 @@
 const connection = require('../database/connection');
 
 module.exports = {
+    async index(req,res){
+        const donations = await connection('donations')
+        .select('*');
+
+        return res.json({donations})
+    },
     async create(req,res){
         const {id} = req.params;
         const {username} = req.headers;
         const {donation} = req.body;
 
         const {ongName} = await connection('incidents')
-        .where('id', id)
+        .where('incidents.id', id)
         .select('ongName')
         .first();
 
@@ -17,7 +23,7 @@ module.exports = {
         .first();
 
         if(saldo < donation){
-            return res.json({message: `Você não tem saldo suficiente para doar!`})
+            return res.json({message: `Você não tem saldo suficiente para doar!${ongName}`})
         }
 
         await connection('users')

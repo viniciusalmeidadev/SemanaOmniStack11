@@ -40,6 +40,7 @@ routes.post('/sessions/user', celebrate({
 routes.get('/ongs', OngController.index);
 
 routes.post('/donation/:id',DonationController.create);
+routes.get('/donation/',DonationController.index);
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -52,6 +53,8 @@ routes.post('/ongs', celebrate({
         password: Joi.string().required()
     }),
 }), OngController.create);
+
+routes.delete('/ongs/:id', OngController.delete);
 
 routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({

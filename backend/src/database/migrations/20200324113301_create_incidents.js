@@ -9,8 +9,11 @@ exports.up = function(knex) {
         table.decimal('collected').notNullable();
       
         table.string('ong_id').notNullable();
+        table.string('ongName').notNullable();
 
         table.foreign('ong_id').references('id').inTable('ongsCompleted');
+        table.foreign('ongName').references('ongName').inTable('ongsCompleted');
+        
     })
         
 };

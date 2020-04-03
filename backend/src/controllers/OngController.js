@@ -32,5 +32,14 @@ module.exports = {
          
             return res.json({id, password, email});
        
-    }
+    },
+
+    async delete(req,res){
+        const { id } = req.params;
+       
+        await connection('ongsCompleted').where('id', id).delete();
+
+        return res.status(204).send();
+
+}
 };

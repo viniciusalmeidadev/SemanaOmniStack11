@@ -34,14 +34,21 @@ module.exports = {
         .where('id', id)
         .increment('collected', donation);
 
+        const {title} = await connection('incidents')
+        .where('id', id)
+        .select('title')
+        .first();
+
         await connection('donations')
         .insert({
             username,
             ongName,
+            title,
+            'incident_id': id,
             'value': donation
         })
 
-        return res.json(donation);
+        return res.json({donation});
 
         
     }

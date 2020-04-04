@@ -20,7 +20,11 @@ const UserProfileController = require('./controllers/UserProfileController');
 
 const RechargeController = require('./controllers/RechargeController');
 
+const OngDonationReceivedController = require('./controllers/OngDonationReceivedController');
+
 const DonationController = require('./controllers/DonationController');
+
+const UserDonationController = require('./controllers/UserDonationController');
 
 const routes = express.Router();
 
@@ -37,10 +41,24 @@ routes.post('/sessions/user', celebrate({
     })
 }), UserSessionController.create);
 
+
+
 routes.get('/ongs', OngController.index);
 
-routes.post('/donation/:id',DonationController.create);
-routes.get('/donation/',DonationController.index);
+
+
+routes.get('/donation', DonationController.index);
+routes.get('/donation/ong', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        ongname: Joi.string().required(),
+    }).unknown(),
+}), OngDonationReceivedController.index);
+
+routes.get('/donation/user', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+    }).unknown(),
+}), UserDonationController.index);
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -77,6 +95,15 @@ routes.get('/users', UsersController.index);
 
 
 routes.use(authMiddleware);
+
+routes.post('/donate/:id',celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+    }).unknown(),
+    [Segments.BODY]:Joi.object().keys({
+        donation: Joi.number().required(),
+    })
+}),DonationController.create);
 
 routes.get('/profile/user', celebrate({
     [Segments.HEADERS]: Joi.object({

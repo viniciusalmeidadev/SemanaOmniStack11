@@ -26,6 +26,8 @@ const DonationController = require('./controllers/DonationController');
 
 const UserDonationController = require('./controllers/UserDonationController');
 
+const IncidentDonationReceivedController = require('./controllers/IncidentDonationReceivedController');
+
 const routes = express.Router();
 
 routes.post('/sessions/ong', celebrate({
@@ -59,6 +61,8 @@ routes.get('/donation/user', celebrate({
         username: Joi.string().required(),
     }).unknown(),
 }), UserDonationController.index);
+
+routes.get('/donate/:id', IncidentDonationReceivedController.index);
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -102,6 +106,7 @@ routes.post('/donate/:id',celebrate({
     }).unknown(),
     [Segments.BODY]:Joi.object().keys({
         donation: Joi.number().required(),
+        message: Joi.string().required(),
     })
 }),DonationController.create);
 

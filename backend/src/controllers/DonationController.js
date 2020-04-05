@@ -10,7 +10,7 @@ module.exports = {
     async create(req,res){
         const {id} = req.params;
         const {username} = req.headers;
-        const {donation} = req.body;
+        const {donation, message} = req.body;
 
         const {ongName} = await connection('incidents')
         .where('incidents.id', id)
@@ -44,6 +44,7 @@ module.exports = {
             username,
             ongName,
             title,
+            message,
             'incident_id': id,
             'value': donation
         })

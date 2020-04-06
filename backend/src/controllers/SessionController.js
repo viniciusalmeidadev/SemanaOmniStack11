@@ -45,15 +45,11 @@ module.exports = {
         
             const token = jwt.sign({id: email.id}, process.env.APP_SECRET);
     
+            const name = email.name;
+            const id = email.id;
             
-
-            const data = [
-                email.name,
-                email.id,
-                token
-            ]
             
-            return res.json({data});
+            return res.json({id, name, token});
     
         }
         
@@ -72,13 +68,10 @@ module.exports = {
     
         const token = jwt.sign({id: login.id}, process.env.APP_SECRET);
 
-        const data = [
-            login.name,
-            login.id,
-            token
-        ]
+        const name = login.name;
+        const id = login.id;
         
-        return res.json({data});
+        return res.json({id, name, token});
 
         }
 }

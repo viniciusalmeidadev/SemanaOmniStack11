@@ -30,9 +30,12 @@ module.exports = {
             if(!email){
                 return res.json({message: 'Login error: Username or E-mail is invalid!'})
             }
+
+            const name = email.name;
+            const id = email.id;
             
             const {password} = await connection('ongsCompleted')
-            .where('id', email.id)
+            .where('id', id)
             .select('password')
             .first();
         
@@ -43,19 +46,19 @@ module.exports = {
                 return res.status(400).json({error: 'Password Invalid'});
             }
         
-            const token = jwt.sign({id: email.id}, process.env.APP_SECRET);
+            const token = jwt.sign({id: id}, process.env.APP_SECRET);
     
-            const name = email.name;
-            const id = email.id;
-            
-            
             return res.json({id, name, token});
     
         }
         
+        
+        const name = login.name;
+        const id = login.id;
+        
 
         const {password} = await connection('ongsCompleted')
-        .where('id', login.id)
+        .where('id', id)
         .select('password')
         .first();
     
@@ -66,11 +69,8 @@ module.exports = {
             return res.status(400).json({error: 'Password Invalid'});
         }
     
-        const token = jwt.sign({id: login.id}, process.env.APP_SECRET);
+        const token = jwt.sign({id: id}, process.env.APP_SECRET);
 
-        const name = login.name;
-        const id = login.id;
-        
         return res.json({id, name, token});
 
         }

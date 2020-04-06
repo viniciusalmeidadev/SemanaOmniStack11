@@ -1,0 +1,35 @@
+.incident-container{
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 32px auto;
+}
+
+.incident-container header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.incident-container header span {
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.incident-container header img{
+    height: 64px;
+}
+
+.incident-container header button{
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+    border: 1px solid #dcdce6;
+    background: transparent;
+    margin-left: 16px;
+    transition: border-color 0.2s;
+}
+
+.incident-container header button:hover{
+    border-color: #999;
+}

@@ -9,6 +9,7 @@ import logoImg from '../../assets/logo.svg';
 
 export default function Profile(){
     const [incidents, setIncidents] = useState([]);
+   
 
     const JWTtoken = localStorage.getItem('Authorization');
     const ongId = localStorage.getItem('ongId');
@@ -17,7 +18,7 @@ export default function Profile(){
     const history = useHistory();
 
     useEffect(()=>{
-        api.get('profile', {
+        api.get('profile/ong', {
             headers: {
                 Authorization: `Bearer ${JWTtoken}`,
                 ong_id: ongId,
@@ -47,6 +48,7 @@ export default function Profile(){
         history.push('/');
     }
 
+
     return(
         <div className="profile-container">
             <header>
@@ -70,9 +72,13 @@ export default function Profile(){
                         <p>{incident.description}</p>
                         <strong>Valor:</strong>
                         <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL'}).format(incident.value)}</p>
+                        <strong>Arrecadado:</strong>
+                        <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL'}).format(incident.collected)}</p>
                         <button type="button" onClick = { ()=> handleDeleteIncident(incident.id)}>
                             <FiTrash2 size={20} color="#a8a8b3" />
                         </button>
+                        <Link className="button" to={`incident/${incident.id}`}> Visualizar </Link>
+
                     </li>
                     ))
 

@@ -19,10 +19,10 @@ export default function Login(){
         e.preventDefault();
 
         try{
-            const response = await api.post('sessions', {userId, userPassword});
+            const response = await api.post('sessions/ong', {userId, userPassword});
             localStorage.setItem('Authorization', response.data.token);
-            localStorage.setItem('ongId', userId);
-            localStorage.setItem('ongName', response.data.ong.name);
+            localStorage.setItem('ongId', response.data.id);
+            localStorage.setItem('ongName', response.data.name);
             
 
            history.push('/profile')
@@ -41,7 +41,7 @@ export default function Login(){
                     <h1>Faça seu Login</h1>
 
                     <input 
-                    placeholder="Sua ID"
+                    placeholder="Seu username ou e-mail"
                     value={userId}
                     onChange = {e => setUserId(e.target.value)}
                     />

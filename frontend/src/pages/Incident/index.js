@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import {FiArrowLeft} from 'react-icons/fi';
-
+import {useHistory} from 'react-router-dom';
 import api from '../../services/api';
 
 import './styles.css';
@@ -13,6 +13,8 @@ export default function Incident(props){
     const [value, setValue] = useState(10000);
     const [percent, setPercent ] = useState(0);
     const [donations, setDonations] = useState([]);
+
+    const history = useHistory();
 
     useEffect(()=>{
         const id = props.match.params.id;
@@ -34,19 +36,34 @@ export default function Incident(props){
         }
 
         getCollectedAndValue();
-       
+
+        const date = new Date("Wed Apr 08 2020 12:56:02 GMT-0300 (GMT-03:00)");
+
+        console.log(Intl.DateTimeFormat('pt-BR').format(date));
         
+        
+
+
      setPercent(collected * 100/value)
        
     },[collected, value])
 
-    const options = {
-        year: 'numeric', month: 'numeric', day: 'numeric',
-        hour: 'numeric', minute: 'numeric', second: 'numeric',
+    const optionsTime = {
+        hour: 'numeric', minute: 'numeric',
+        
         hour12: false,
-        timeZone: 'America/sao_paulo' 
+        timeZone: 'America/Sao_Paulo' 
       };
 
+    const optionsDate = {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour12: false,
+        timeZone: 'America/Sao_Paulo' 
+      };
+
+      function handleExit(){
+        history.push('/profile')
+      }
     
 
     return(
@@ -57,7 +74,7 @@ export default function Incident(props){
                 <span>Caso: Compra de livros para biblioteca</span>
                 </div>
 
-                <button>
+                <button onClick={handleExit}>
                     <FiArrowLeft size="16" color="#E02041"/>
                 </button>
             </header>
@@ -83,9 +100,7 @@ export default function Incident(props){
                             <strong>Valor:</strong>
                             <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL'}).format(donation.value)}</p>
 
-                            <p>{Intl.DateTimeFormat('pt-BR', options).format(donation.dateDonate)}</p>
-
-                            <p className="date">17:08 em 12/04</p>
+                            <p className="date">{Intl.DateTimeFormat('pt-BR', optionsDate).format(new Date(donation.dateDonate))} às {Intl.DateTimeFormat('pt-BR', optionsTime).format(new Date(donation.dateDonate))} </p>
                             
                         </li>
                     

@@ -11,8 +11,8 @@ module.exports = {
         .count();
 
         const donations = await connection('donations')
-        .limit(10)
-        .offset((page - 1) * 10)
+        .limit(12)
+        .offset((page - 1) * 12)
         .where('incident_id', id)
         .select('*');
 

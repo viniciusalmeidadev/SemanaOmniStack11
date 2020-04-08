@@ -27,7 +27,7 @@ export default function Profile(){
             setIncidents(response.data);
             console.log(ongId)
         })
-    }, [ongId]);
+    }, [ongId,JWTtoken]);
 
     async function handleDeleteIncident(id){
         try{

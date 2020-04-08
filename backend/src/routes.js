@@ -28,6 +28,8 @@ const UserDonationController = require('./controllers/UserDonationController');
 
 const IncidentDonationReceivedController = require('./controllers/IncidentDonationReceivedController');
 
+const DonationIncidentController = require('./controllers/DonationIncidentController');
+
 const routes = express.Router();
 
 routes.post('/sessions/ong', celebrate({
@@ -46,6 +48,8 @@ routes.post('/sessions/user', celebrate({
 
 
 routes.get('/ongs', OngController.index);
+
+routes.get('/incident/:id', DonationIncidentController.index );
 
 
 

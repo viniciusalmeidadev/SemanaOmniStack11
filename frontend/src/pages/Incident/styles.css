@@ -9,15 +9,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 
 .incident-container header span {
-    font-size: 16px;
+    font-size: 18px;
     margin-left: 20px;
 }
 
 .incident-container header img{
     height: 64px;
+}
+
+.incident-container header .logo-incident{
+    display: flex;
+    align-items: center;
 }
 
 .incident-container header button{
@@ -26,10 +32,82 @@
     border-radius: 4px;
     border: 1px solid #dcdce6;
     background: transparent;
-    margin-left: 16px;
+   
     transition: border-color 0.2s;
+   
 }
 
 .incident-container header button:hover{
     border-color: #999;
+}
+
+.incident-container h2{
+    margin-top: 80px;
+}
+
+.incident-container .progressbar-full{
+    display: flex;
+    align-content: center;
+    
+}
+.incident-container .progressbar-full .progress-bar{
+    position: relative;
+    height: 20px;
+    border: 1px solid #999;
+    width: 200px;
+    border-radius: 50px;
+   
+    margin-top: 3px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    
+}
+
+.incident-container .progressbar-full .progress-bar .preenchimento{
+    height: 100%;
+    background: #e02041;
+    border-radius: inherit;
+    transition: width .4s ease-in;
+}
+
+.incident-container .progressbar-full strong{
+    font-size: 24px;
+    color: black;
+    margin-right: 10px;
+    
+    
+}
+
+.incident-container .collected-p {
+    margin-bottom: 20px;
+    color: #41414d;
+}
+
+.incident-container ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 18px;
+    list-style: none;
+}
+
+.incident-container ul li{
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.incident-container ul li strong{
+    color:#41414d;
+}
+
+.incident-container ul li p{
+    margin-bottom: 10px;
+    color: #737380;
+}
+
+.incident-container ul li .date{
+    position: absolute;
+    bottom:0px;
+    right: 15px;
 }

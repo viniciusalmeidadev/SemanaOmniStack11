@@ -10,7 +10,7 @@ module.exports = {
         .where('incident_id', id)
         .count();
 
-        const data = await connection('donations')
+        const donations = await connection('donations')
         .limit(10)
         .offset((page - 1) * 10)
         .where('incident_id', id)
@@ -18,7 +18,7 @@ module.exports = {
 
         res.header('X-Total-Count', count['count(*)']);
 
-        return res.json({data});
+        return res.json(donations);
 
 
     }

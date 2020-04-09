@@ -1,0 +1,74 @@
+.calculadora{
+    width: 200px;
+    height: 250px;
+    background-color: #999;
+ overflow: hidden;
+    margin: 32px auto;
+    border-radius: 20px;
+}
+
+.calculadora .result{
+    width: 180px;
+    background-color:#dcdce6;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    height: 30px;
+    align-items: right;
+    display: flex;
+    justify-content: space-around;
+}
+
+.calculadora .group1{
+    display: flex;
+    justify-content: space-around;
+}
+.calculadora .group1 .buttonCalc{
+    border: 1px solid black;
+    height: 40px;
+    background-color: #dcdce6;
+    width: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    
+}
+
+.calculadora .group1 .buttonCalc:hover{
+   
+    background-color: yellow;
+    margin-top: 1px;
+    
+}
+.calculadora .group2{
+    display: flex;
+    justify-content: space-around;
+}
+.calculadora .group2 .buttonCalc{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.calculadora .group3{
+    display: flex;
+    justify-content: space-around;
+}
+.calculadora .group3 .buttonCalc{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.calculadora .group4{
+    display: flex;
+    justify-content: space-around;
+}
+.calculadora .group4 .buttonCalc{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+}

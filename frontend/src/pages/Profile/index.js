@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {FiPower, FiTrash2} from 'react-icons/fi';
+import {FiPower, FiTrash2, FiLogIn} from 'react-icons/fi';
 import api from '../../services/api';
 
 import './styles.css';
@@ -53,7 +53,11 @@ export default function Profile(){
         <div className="profile-container">
             <header>
                 <img src={logoImg} alt="be the hero"/>
+                <div className="ong-info">
                 <span>Bem vinda, {ongName}</span>
+                <Link className="a-donations" to="/donations">Ver todas as doações</Link>
+                </div>
+
 
                 <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
                 <button type="button" onClick={handleLogout}>
@@ -77,7 +81,9 @@ export default function Profile(){
                         <button type="button" onClick = { ()=> handleDeleteIncident(incident.id)}>
                             <FiTrash2 size={20} color="#a8a8b3" />
                         </button>
-                        <Link className="button" to={`incident/${incident.id}`}> Visualizar </Link>
+                        <Link to={`incident/${incident.id}`}> 
+                            <FiLogIn size={20} color="#e02041"/>
+                        </Link>
 
                     </li>
                     ))

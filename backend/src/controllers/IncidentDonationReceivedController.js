@@ -16,7 +16,7 @@ module.exports = {
         .where('incident_id', id)
         .select('*');
 
-        res.header('X-Total-Count', count['count(*)']);
+        res.header('Total', count['count(*)']);
 
         return res.json(donations);
 

@@ -9,42 +9,60 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 
 export default function Incident(props){
+    const [incidentName, setIncidentName] = useState('');
     const [collected, setCollected] = useState(10000);
     const [value, setValue] = useState(10000);
     const [percent, setPercent ] = useState(0);
     const [donations, setDonations] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
+    
 
     const history = useHistory();
 
-    useEffect(()=>{
+    async function loadDonations(){
         const id = props.match.params.id;
-        async function incidentDonations(){
-       
-        const response = await api.get(`donate/${id}`)
 
-        setDonations(response.data);
-        console.log(response);
-
+        if(loading){
+            return;
         }
-        incidentDonations();
+
+        if(total>0 && donations.length === total){
+            return;
+        }
+        
+        setLoading(true);
+
+        const response = await api.get(`donate/${id}`, {
+            params:{page}
+        });
+
+        const totalres = await api.get(`donate/${id}`);
+
+        setDonations([...donations, ...response.data]);
+        setTotal(totalres.headers['Total']);
+        setPage(page + 1);
+        setLoading(false);
+        }
+
+    useEffect(()=>{
+        loadDonations();
+        const id = props.match.params.id;
+       
         async function getCollectedAndValue(){
             const response = await api.get(`incident/${id}`);
 
             setCollected(response.data.collected);
-            setValue(response.data.value)
-            console.log(response);
+            setValue(response.data.value);
+            setIncidentName(response.data.title);
+           
         }
 
         getCollectedAndValue();
-
-        const date = new Date("Wed Apr 08 2020 12:56:02 GMT-0300 (GMT-03:00)");
-
-        console.log(Intl.DateTimeFormat('pt-BR').format(date));
+        setPercent(collected * 100/value);
         
         
-
-
-     setPercent(collected * 100/value)
        
     },[collected, value])
 
@@ -64,6 +82,11 @@ export default function Incident(props){
       function handleExit(){
         history.push('/profile')
       }
+
+     
+
+       
+      
     
 
     return(
@@ -71,7 +94,7 @@ export default function Incident(props){
             <header>
                 <div className="logo-incident">
                 <img src={logoImg} alt="bethehero"></img>
-                <span>Caso: Compra de livros para biblioteca</span>
+                <span>Caso: {incidentName}</span>
                 </div>
 
                 <button onClick={handleExit}>
@@ -80,12 +103,14 @@ export default function Incident(props){
             </header>
             <h2>Total arrecadado:</h2>
             <div className="progressbar-full">
-            <strong>{percent}%</strong>
+            <strong>{percent.toFixed()}%</strong>
             <div className="progress-bar">
                 <div className="preenchimento" style={{width: `${percent}%`}}/>
             </div>
             </div>
+            
             <p className="collected-p">{Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL'}).format(collected)} de {Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL'}).format(value)}</p>
+            
             <ul>
                 {
                     donations.map(donation=>(
@@ -107,6 +132,8 @@ export default function Incident(props){
                     ))
                 }
             </ul>
+
+            <button className="buttonLoadDonations" onClick={loadDonations}>Carregar mais doadores</button>
         </div>
     )
 }

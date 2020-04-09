@@ -10,10 +10,27 @@
     align-items: center;
 }
 
-.profile-container header span{
+.profile-container header .ong-info{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.profile-container header .ong-info span{
     font-size: 20px;
     margin-left: 20px;
 }
+
+.profile-container header .ong-info .a-donations{
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #41414d;
+}
+
+
+
 
 .profile-container header img{
     height: 64px;
@@ -68,8 +85,21 @@
     border: 0;
 }
 
-
 .profile-container ul li button:hover{
+    opacity: 0.8;
+}
+
+.profile-container ul li a{
+    background: #fff;
+    position: absolute;
+    right: 84px;
+    top: 24px;
+    border: 0;
+    
+}
+
+.profile-container ul li a:hover{
+    
     opacity: 0.8;
 }
 

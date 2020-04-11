@@ -41,6 +41,10 @@ export default function Incidents(){
         setLoading(false);
     }
 
+    function logOut(){
+        navigation.navigate('Login')
+    }
+
     useEffect(()=>{
         loadIncidents();
     },[])
@@ -53,6 +57,9 @@ export default function Incidents(){
                 <Text style={styles.headerText}>
                     Total de <Text style={styles.headerTextBold}>{total} casos</Text>
                 </Text>
+                <TouchableOpacity onPress={logOut}>
+                    <Text>Sair</Text>
+                </TouchableOpacity>
             </View>
 
             <Text style={styles.title}>Bem-vindo!</Text>

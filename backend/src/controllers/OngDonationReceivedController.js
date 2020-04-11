@@ -10,15 +10,15 @@ module.exports = {
         .where('ongName', ongname)
         .count();
 
-        const donationReceived = await connection('donations')
-        .limit(10)
-        .offset((page - 1) * 10)
+        const donations = await connection('donations')
+        .limit(12)
+        .offset((page - 1) * 12)
         .where('ongName', ongname)
         .select('*');
 
         res.header('X-Total-Count', count['count(*)']);
 
-        return res.json({donationReceived});
+        return res.json(donations);
 
 
     }

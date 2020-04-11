@@ -23,6 +23,7 @@ export default function Login(){
             localStorage.setItem('Authorization', response.data.token);
             localStorage.setItem('ongId', response.data.id);
             localStorage.setItem('ongName', response.data.name);
+            localStorage.setItem('ongname', userId);
             
 
            history.push('/profile')

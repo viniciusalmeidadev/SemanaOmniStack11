@@ -25,9 +25,9 @@ export default StyleSheet.create({
     },
     
     title:{
-       fontSize: 30,
-       marginBottom:16,
-       marginTop:48,
+       fontSize: 20,
+       marginBottom:10,
+       marginTop:25,
        color:'#13131a',
        fontWeight:'bold' 
     },
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     },
 
     incidentList:{
-        marginTop:32,
+        marginTop:25,
     },
 
     incident:{
@@ -58,7 +58,7 @@ export default StyleSheet.create({
     incidentValue:{
         fontSize:15,
         marginTop:8,
-        marginBottom:24,
+        marginBottom:12,
         color:'#737380'
 
     },

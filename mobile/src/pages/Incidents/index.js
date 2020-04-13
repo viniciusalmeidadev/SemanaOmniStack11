@@ -42,7 +42,7 @@ export default function Incidents(){
     }
 
     function logOut(){
-        navigation.navigate('Login')
+        navigation.navigate('MenuFooter')
     }
 
     useEffect(()=>{

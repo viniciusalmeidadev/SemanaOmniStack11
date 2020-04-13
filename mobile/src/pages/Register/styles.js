@@ -6,48 +6,47 @@ export default StyleSheet.create({
         flex:1,
         justifyContent: 'center',
         alignItems:'center'
-    },
+    }, 
     form:{
         alignSelf: 'stretch',
+        marginTop: 30,
         marginLeft: 30,
-        marginRight: 30,
-        marginTop: 30
+        marginRight: 30
     },
     input:{
         borderWidth:1,
-        borderColor: '#ddd',
-        marginBottom: 20,
-        fontSize: 16,
-        paddingHorizontal: 20,
+        borderRadius:4,
         height: 44,
+        paddingHorizontal: 20,
+        marginBottom: 20,
+        borderColor: '#ddd',
         color:'#444',
-        borderRadius: 4
+        fontSize: 16,
     },
-    button:{
+    buttonRegister:{
         borderRadius: 4,
+        backgroundColor: '#e02141',
         height: 42,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#e02141',
-        marginBottom: 10
-    },
-    buttonText:{
-        fontSize: 16,
-        color: '#fff',
-        fontWeight:'bold'
-    },
-    buttonRegister:{
-        borderWidth:2,
-        borderColor: '#e02141',
-        borderRadius: 4,
-        height: 42,
-        justifyContent: 'center',
-        alignItems: 'center'
+        marginBottom:10
     },
     textRegister:{
-        color: '#e02141',
-        fontSize: 16,
-        fontWeight: 'bold'
+        color: '#fff',
+        fontWeight:'bold',
+        fontSize: 16
+    },
+    buttonLogin:{
+        borderWidth: 2,
+        borderRadius: 4,
+        borderColor:'#e02141',
+        height: 42,
+        justifyContent: 'center',
+        alignItems:'center',
+    },
+    textLogin:{
+        color:'#e02141',
+        fontWeight:'bold',
+        fontSize:16
     }
-
 })

@@ -8,6 +8,9 @@ import logoImg from '../../assets/logo.png';
 
 import styles from './styles';
 
+//componentes
+import MenuFooter from '../../component/Menu-Footer';
+
 export default function Incidents(){
 
     const [incidents, setIncidents] = useState([]);
@@ -51,6 +54,7 @@ export default function Incidents(){
 
 
     return(
+        <>
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image source={logoImg}/>
@@ -90,10 +94,15 @@ export default function Incidents(){
                     </TouchableOpacity>
                 </View>
 
+                
+            
             )}
             />
                
         </View>
+
+        <MenuFooter/>
+        </>
     )
 }
 

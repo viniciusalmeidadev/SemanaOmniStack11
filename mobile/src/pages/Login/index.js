@@ -27,6 +27,7 @@ export default function Login() {
         Keyboard.dismiss();
 
         await AsyncStorage.setItem('username', uName);
+        
         setUName("");
         setUserPass("");    
 
@@ -63,6 +64,7 @@ export default function Login() {
             placeholderTextColor="#999"
             secureTextEntry={true}
             autoCorrect={false}
+            
             style={styles.input}
             value={userPass}
             onChangeText={setUserPass}

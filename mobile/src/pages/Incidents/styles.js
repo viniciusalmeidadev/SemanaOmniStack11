@@ -19,7 +19,7 @@ export default StyleSheet.create({
         color:'#737380',
 
     },
-
+    
     headerTextBold:{
         fontWeight:'bold'
     },
@@ -73,5 +73,6 @@ export default StyleSheet.create({
         color:'#e02041',
         fontSize:15,
         fontWeight:'bold',
-    }
+    },
+
 });

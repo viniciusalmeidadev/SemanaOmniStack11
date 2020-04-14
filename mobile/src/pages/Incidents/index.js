@@ -1,5 +1,5 @@
 import React, {useEffect, useState}from 'react';
-import {View,FlatList, Text, Image, TouchableOpacity} from 'react-native';
+import {View,FlatList, Text, Image, TouchableOpacity, AsyncStorage} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Feather} from '@expo/vector-icons';
 import api from '../../services/api';
@@ -19,6 +19,8 @@ export default function Incidents(){
     const [loading, setLoading]=useState(false);
 
     const navigation = useNavigation();
+
+    
 
     function navigateToDetail(incident){
         navigation.navigate('Detail',{incident});

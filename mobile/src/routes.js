@@ -18,11 +18,12 @@ export default function Routes(){
 
             <AppStack.Navigator screenOptions={{ headerShown: false }}>
               
-               
+                
                 <AppStack.Screen name="Incidents" component={Incidents}/>
                 <AppStack.Screen name="Detail" component={Detail}/>
                 <AppStack.Screen name="Recharge" component={Recharge}/>
                 <AppStack.Screen name="Login" component={Login}/>
+                
                
                <AppStack.Screen name="Register" component={Register}/>
                

@@ -1,38 +1,55 @@
-import React, {useState} from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, TouchableOpacity, Text, AsyncStorage } from 'react-native';
 import {Feather} from '@expo/vector-icons';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import styles from './styles';
 
 export default function MenuFooter() {
 
-  const [colorIncidents, setColorIncidents] = useState('black');
-  const [colorRecharge, setColorRecharge] = useState('#E02141');
-  const [colorExtrato, setColorExtrato] = useState('#E02141');
-  const [colorSettings, setColorSettings] = useState('#E02141');
+  const [colorIncidents, setColorIncidents] = useState('');
+  const [colorRecharge, setColorRecharge] = useState('');
+  const [colorExtrato, setColorExtrato] = useState('');
+  const [colorSettings, setColorSettings] = useState('');
+  const [optionColor, setOptionColor] = useState('');
 
-    const navigation = useNavigation();
 
-    function colorChange(option){
-      if(option === 'incidents'){
+  const route = useRoute();
+  
+  
+  const navigation = useNavigation();
+
+
+    useEffect(()=>{
+      
+      colorChange();
+
+    },[optionColor])
+
+   
+
+    function colorChange(){
+      if(optionColor === 'incidents'){
 
         setColorIncidents('black');
         setColorRecharge('#E02141');
         setColorSettings('#E02141');
         setColorExtrato('#E02141');
+
+        
  
         navigation.navigate('Incidents');
 
-      }else if(option === 'recharge'){
+      }else if(optionColor === 'recharge'){
 
         setColorIncidents('#E02141');
         setColorRecharge('black')
         setColorSettings('#E02141')
         setColorExtrato('#E02141')
 
-        navigation.navigate('Recharge');
 
-      }else if(option === 'extract'){
+        navigation.navigate('Recharge', {optionColor});
+
+      }else if(optionColor === 'extract'){
 
         setColorIncidents('#E02141');
         setColorRecharge('#E02141')
@@ -40,13 +57,18 @@ export default function MenuFooter() {
         setColorSettings('#E02141')
 
       }
-      else if(option === 'settings'){
+      else if(optionColor === 'settings'){
 
         setColorIncidents('#E02141');
         setColorRecharge('#E02141')
         setColorExtrato('#E02141')
         setColorSettings('black')
         
+      }else{
+        setColorIncidents('black');
+        setColorRecharge('#E02141');
+        setColorSettings('#E02141');
+        setColorExtrato('#E02141');
       }
     }
     
@@ -54,18 +76,20 @@ export default function MenuFooter() {
   return (
     <View style={styles.header}>
       <View style={styles.menuFooter}>
-        <TouchableOpacity style={styles.button}  onPress={() => colorChange(option = 'incidents')}>
+        <TouchableOpacity style={styles.button}  onPress={() => setOptionColor('incidents')}>
           <Feather name="heart" size={30}  color={colorIncidents} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => colorChange(option = 'recharge')}>
+        <TouchableOpacity onPress={() => setOptionColor('recharge')}>
           <Feather name="dollar-sign" size={25}  color={colorRecharge}   />
         </TouchableOpacity>
-        <TouchableOpacity  onPress={() => colorChange(option = 'extract')}>
+        <TouchableOpacity  onPress={() => setOptionColor('extract')}>
         <Feather name="file-text" size={25} color={colorExtrato}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => colorChange(option = 'settings')}>
+        <TouchableOpacity onPress={() => setOptionColor('settings')}>
         <Feather name="settings"  size={25} color={colorSettings} />
         </TouchableOpacity>
+
+        
       </View>
     </View>
   );

@@ -88,8 +88,6 @@ export default function MenuFooter() {
         <TouchableOpacity onPress={() => setOptionColor('settings')}>
         <Feather name="settings"  size={25} color={colorSettings} />
         </TouchableOpacity>
-
-        
       </View>
     </View>
   );

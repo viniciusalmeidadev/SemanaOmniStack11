@@ -8,8 +8,7 @@ import logoImg from '../../assets/logo.png';
 
 import styles from './styles';
 
-//componentes
-import MenuFooter from '../../component/Menu-Footer';
+
 
 export default function Incidents(){
 
@@ -103,7 +102,7 @@ export default function Incidents(){
                
         </View>
 
-        <MenuFooter/>
+       
         </>
     )
 }

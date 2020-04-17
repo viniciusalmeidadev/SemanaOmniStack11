@@ -5,7 +5,8 @@ export default StyleSheet.create({
     container:{
         flex:1,
         paddingHorizontal:24,
-        paddingTop: Constants.statusBarHeight + 20
+        paddingTop: Constants.statusBarHeight + 20,
+        backgroundColor:'#ecf1f5'
     },
 
     header:{
@@ -73,6 +74,21 @@ export default StyleSheet.create({
         color:'#e02041',
         fontSize:15,
         fontWeight:'bold',
+    },
+
+    header:{
+        flexDirection:'row',
+        alignItems:'flex-end',
+        justifyContent:'space-around',
+        height:'10%',
+        
+    },
+    menuFooter:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        height: 60,
+        width:'100%',
     },
 
 });

@@ -16,11 +16,15 @@ export default function Incidents(){
     const [total, setTotal]=useState(0);
     const [page, setPage]=useState(1);
     const [loading, setLoading]=useState(false);
+    const [username, setUsername] = useState('');
 
     const navigation = useNavigation();
 
     
-
+    async function getUsername(){
+         setUsername(await AsyncStorage.getItem('userDonator'));
+         
+    }
     
 
     function navigateToDetail(incident){
@@ -37,6 +41,7 @@ export default function Incidents(){
 
         setLoading(true);
 
+
         const response = await api.get('incidents',{
             params:{ page }
         });
@@ -50,7 +55,7 @@ export default function Incidents(){
     
 
     useEffect(()=>{
-        const username = AsyncStorage.getItem('username');
+        getUsername();
         loadIncidents();
     },[])
 
@@ -66,7 +71,7 @@ export default function Incidents(){
                 
             </View>
 
-            <Text style={styles.title}>Bem-vindo</Text>
+            <Text style={styles.title}>Bem-vindo, {username}!</Text>
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia!</Text>
            
 

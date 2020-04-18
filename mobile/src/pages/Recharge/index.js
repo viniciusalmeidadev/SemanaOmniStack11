@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TouchableOpacity, TouchableHighlight, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight, TextInput, AsyncStorage } from 'react-native';
 import api from '../../services/api';
 
 import {useRoute} from '@react-navigation/native';
@@ -13,6 +13,7 @@ export default function Recharge() {
   const route = useRoute(); 
 
   const [value, setValue] = useState(0);
+  const [username, setUsername] = useState('');
 
   useEffect(()=>{
     clearValue();
@@ -26,11 +27,17 @@ export default function Recharge() {
     if(value === 0){
       alert('selecione um valor')
     }else{
-      await api.put('/recharge', value)
+      setUsername(await AsyncStorage.getItem('userDonator'));
+      await api.put('recharge', value, {
+        headers:{
+           'username': 'viniciusalmeida'
+          }
+    })
       setValue(0);
     }
     }catch(err){
       alert('algo deu errado')
+      console.log(err)
     }
    
   }
@@ -41,10 +48,10 @@ export default function Recharge() {
       <Text style={styles.titleRecharge}>Recargas</Text>
         <Text style={styles.textRecharge}>Selecione um valor abaixo</Text>
 
-        <TouchableHighlight style={styles.listRecharge} value={value} onPress={()=> setValue(5)}>
+        <TouchableOpacity style={styles.listRecharge} value={value} onPress={()=> setValue(5)}>
           <Text style={styles.textValue}>{Intl.NumberFormat('pt-BR',{style:'currency', currency:'BRL'}).format(5)}</Text>
           
-        </TouchableHighlight>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.listRecharge} value={value} onPress={()=> setValue(20)}>
           <Text style={styles.textValue}>{Intl.NumberFormat('pt-BR',{style:'currency', currency:'BRL'}).format(20)}</Text>
         </TouchableOpacity>

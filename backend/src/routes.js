@@ -100,6 +100,16 @@ routes.post('/users', celebrate({
 
 routes.get('/users', UsersController.index);
 
+routes.put('/recharge',celebrate({
+    [Segments.HEADERS]: Joi.object({
+        username: Joi.string().required(),
+        
+    }).unknown(),
+    [Segments.BODY]: Joi.object().keys({
+        value: Joi.number().required(),
+    })
+}),  RechargeController.update);
+
 
 
 routes.use(authMiddleware);
@@ -126,15 +136,7 @@ routes.get('/profile/ong', celebrate({
     }).unknown(),
 }), ProfileController.index);
 
-routes.put('/recharge',celebrate({
-    [Segments.HEADERS]: Joi.object({
-        username: Joi.string().required(),
-        
-    }).unknown(),
-    [Segments.BODY]: Joi.object().keys({
-        value: Joi.number().required(),
-    })
-}),  RechargeController.update);
+
 
 routes.get('/recharge/list', celebrate({
     [Segments.HEADERS]: Joi.object({

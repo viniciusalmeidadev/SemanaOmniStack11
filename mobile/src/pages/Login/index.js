@@ -26,11 +26,12 @@ export default function Login() {
 
         Keyboard.dismiss();
 
-        await AsyncStorage.setItem('username', uName);
+        await AsyncStorage.setItem('username', 'viniciusalmeida');
         
         setUName("");
         setUserPass("");    
-
+        
+       
         navigation.navigate('Incidents');
         }catch(err){
             alert('Dados incorretos');

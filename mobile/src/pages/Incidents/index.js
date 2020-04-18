@@ -21,6 +21,8 @@ export default function Incidents(){
 
     
 
+    
+
     function navigateToDetail(incident){
         navigation.navigate('Detail',{incident});
     }
@@ -45,11 +47,10 @@ export default function Incidents(){
         setLoading(false);
     }
 
-    function logOut(){
-        navigation.navigate('MenuFooter')
-    }
+    
 
     useEffect(()=>{
+        const username = AsyncStorage.getItem('username');
         loadIncidents();
     },[])
 
@@ -62,12 +63,10 @@ export default function Incidents(){
                 <Text style={styles.headerText}>
                     Total de <Text style={styles.headerTextBold}>{total} casos</Text>
                 </Text>
-                <TouchableOpacity onPress={logOut}>
-                    <Text>Sair</Text>
-                </TouchableOpacity>
+                
             </View>
 
-            <Text style={styles.title}>Bem-vindo!</Text>
+            <Text style={styles.title}>Bem-vindo</Text>
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia!</Text>
            
 
